@@ -24,9 +24,9 @@ router.get('/', function(req, res) {
         .exec(function(err, ticket) {
             if (err) {
                 res.send(err);
-            } else {
-                res.json(ticket);
-            }
+                return;
+            } 
+            res.json(ticket);
         });
 });
 

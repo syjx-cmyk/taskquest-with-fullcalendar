@@ -93,7 +93,7 @@
                         <div ui-sortable="sortableOptions" class="apps-container" style="min-height: 200px" data-status="{{line.status}}">
                             <div ng-repeat="card in line.cards" data-id="{{card._id}}">
                                 <article class="card" ng-click="openCard(card)">
-                                    <img ng-src="images/{{card.icon}}.png"> <span class="tag" ng-repeat="tag in card.name | findTag">{{tag}}</span>  {{card.name | removeTag}} <span class="user" ng-class="{userme: isUserMe(card.user)}">{{card.user}}</span>
+                                    <img ng-src="images/{{card.icon}}.png"> <span class="tag">{{card.category}}</span>  {{card.name}} <span class="user" ng-class="{userme: isUserMe(card.user)}">{{card.user}}</span>
                                     <img ng-if="card.memo" class="line-card-memoicon" ng-src="images/memo.png" alt="comment"/>
                                 </article>
                             </div>
@@ -117,7 +117,14 @@
             Title: {{card.title}}<BR>
             <input class="form-control" ng-model="card.name"><BR>
             Category: {{card.category}}<BR>
-            <input class="form-control" ng-model="card.category"><BR>
+            <select ng-model="card.category" name="" id="">
+
+            <!-- [TODO]カテゴリAPI用意してng-optionsできるようにしよう-->
+
+                <option value="SYSTEM1">SYSTEM1</option>
+                <option value="SYSTEM2">SYSTEM2</option>
+                <option value="SYSTEM3">SYSTEM3</option>
+            </select><BR>
             Deadline: {{card.deadline}}<BR>
             <input type="date" class="form-control" ng-model="card.deadline"><BR>
             User: <BR>

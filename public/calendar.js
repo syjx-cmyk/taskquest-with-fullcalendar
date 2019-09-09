@@ -31,7 +31,7 @@ $(function () {
                 var date = event.start ? event.start : event.start.toDateString();
                 console.log(event.start)
                 buildModalWindow(
-                    event.title,
+                    event.name,
                     event.category,
                     event.start._i,
                     event.user,
@@ -52,7 +52,8 @@ $(function () {
                     result[k].status != "archive") {
                     events.push({
                         "id" : result[k]._id,
-                        "title": result[k].name,
+                        "title": "[" + result[k].category + "] " + result[k].name,
+                        "name": result[k].name,
                         "start": result[k].deadline.substring(0,10),
                         "user": result[k].user,
                         "category": result[k].category,

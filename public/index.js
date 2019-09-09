@@ -89,7 +89,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
 
 
             $http.get("/boards/" + $scope.selectedBoard.name).success(function(result) {
-                $scope.linesAry = [
+                $scope.masterAry = [
                     [{
                         _id: "1",
                         title: "未定",
@@ -124,6 +124,8 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
                         cards: (result.done ? result.done : [])
                     }]
                 ];
+
+                $scope.linesAry = $scope.masterAry;
             });
         }
     }

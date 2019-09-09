@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
     Board.find(function(err, boards) {
         if (err) {
             res.send(err);
+            return;
         }
         if (boards) {
             res.json(boards);
@@ -28,6 +29,7 @@ router.post("/", function(req, res) {
     board.save(function(err) {
         if (err) {
             res.send(err);
+            return;
         }
         res.json({
             message: "Board Created."
@@ -42,6 +44,7 @@ router.delete("/:id", function(req, res) {
         function(err) {
             if (err) {
                 res.send(err);
+                return;
             }
             res.json({
                 message: "Board deleted."
@@ -62,6 +65,7 @@ router.get('/:id', function(req, res) {
     }, function(err, board) {
         if (err) {
             res.send(err);
+            return;
         }
         if (board) {
             Ticket.find({
@@ -69,6 +73,7 @@ router.get('/:id', function(req, res) {
             }, function(err, tickets) {
                 if (err) {
                     res.send(err);
+                    return;
                 }
                 var result = {
                     name: board ? board.name : "No Board",
@@ -84,8 +89,6 @@ router.get('/:id', function(req, res) {
             });
 
         }
-
-
     });
 });
 
