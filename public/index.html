@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/fullcalendar.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
     <script type="text/javascript" src="javascripts/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery-ui.min.js"></script>
@@ -11,6 +12,8 @@
     <script type="text/javascript" src="javascripts/angular-ui.min.js"></script>
     <script type="text/javascript" src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script type="text/javascript" src="javascripts/sortable.js"></script>
+    <script type="text/javascript" src="javascripts/moment.min.js"></script>
+    <script type="text/javascript" src="javascripts/fullcalendar.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <title>TaskQuest</title>
 </head>
@@ -52,6 +55,9 @@
                     </select>
                 </li>
 
+            <ul class="nav navbar-nav">
+                <li><a href="/calendar.html">CALENDAR</a></li>
+            </ul>
                 <li><a href="#" ng-click="newBoard()">New Board</a></li>
             </ul>
 
@@ -63,22 +69,13 @@
 </div>
 
     <div class="container">
+<!--
         <div class="row">
             <div class="col-xs-12">
-                <div class="teamStatus">
-                    <div id="calendar"></div>
-
-                    <span ng-repeat="user in userList">
-                        <span class="user">{{user.user}}</span>
-                        <span ng-repeat="task in user.task">
-                            <img ng-src="images/{{task.icon}}.png" popover-trigger="mouseenter" popover-placement="bottom" popover="{{task.name}}" >
-                        </span>
-                    </span>
-
-                </div>
-
+                <div class="f_calendar"></div>
             </div>
         </div>
+-->
 
         <div class="row">
             <div class="col-xs-4" ng-repeat="lines in linesAry">
@@ -117,8 +114,12 @@
             <h3 class="modal-title">Edit</h3>
         </div>
         <div class="modal-body">
-            Title: <BR>
+            Title: {{card.title}}<BR>
             <input class="form-control" ng-model="card.name"><BR>
+            Category: {{card.category}}<BR>
+            <input class="form-control" ng-model="card.category"><BR>
+            Deadline: {{card.deadline}}<BR>
+            <input type="date" class="form-control" ng-model="card.deadline"><BR>
             User: <BR>
             <input class="form-control" ng-model="card.user"><BR>
             Memo: <BR>

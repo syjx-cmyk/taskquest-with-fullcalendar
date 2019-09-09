@@ -3,7 +3,7 @@ var router = express.Router();
 var Ticket = require('../models/ticket');
 var Board = require('../models/board');
 var dotenv = require('dotenv');
-dotenv.load();
+dotenv.config();
 
 
 router.get('/', function(req, res) {

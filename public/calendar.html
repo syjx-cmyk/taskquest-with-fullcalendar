@@ -1,0 +1,56 @@
+<html ng-app="myapp">
+    <link rel="stylesheet" href="stylesheets/fullcalendar.css" />
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="javascripts/moment.min.js"></script>
+    <script type="text/javascript" src="javascripts/fullcalendar.js"></script>
+    <script type="text/javascript" src="calendar.js"></script>
+
+<body>
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">TASKBOARD</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin.html">Setting</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div id="modal-window" style="display: none;">
+    <div class="modal-header">
+        <h3 class="modal-title"><span id="modal-title"></span></h3>
+    </div>
+    <div class="modal-body">
+        Category: <span id="modal-category"></span><BR>
+        Deadline: <span id="modal-deadline"></span><BR>
+        User: <span id="modal-user"></span><BR>
+        Memo: <pre><class="well" id="modal-memo"></pre><BR>
+    </div>
+</div>
+
+
+<div class="container">
+<div class="col-xs-12">
+    <button id="reload">RELOAD</button>
+    <div id="calendar"></div>
+</div>
+</div>
+</body>
+
+</html>

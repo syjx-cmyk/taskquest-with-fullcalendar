@@ -91,7 +91,6 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
             $http.get("/boards/" + $scope.selectedBoard.name).success(function(result) {
                 $scope.linesAry = [
                     [{
-
                         _id: "1",
                         title: "未定",
                         status: "backlog",
@@ -161,6 +160,15 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
         });
     }
 
+    function cardDateResize(card) {
+        if (card.deadline !== undefined) {
+            date = card.deadline.substring(0,10);
+            card.deadline = date;
+        }
+        return card;
+    }
+
+
     $scope.$watch("selectedBoard", function() {
         if ($scope.selectedBoard) {
             loadTickets();
@@ -189,6 +197,8 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     };
 
     $scope.openModal = function(card) {
+        card = cardDateResize(card);
+        console.log(card.deadline);
         var modalInstance = $modal.open({
             templateUrl: 'myModalContent.html',
             controller: ModalInstanceCtrl,
@@ -251,6 +261,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     };
 
     function archiveCard(card){
+        card = cardDateResize(card);
         var deferred = $q.defer();
 
         $http.put("/tickets/" + card._id , {
@@ -262,6 +273,7 @@ var TaskCtrl = function($scope, $http, $location, $modal, $q) {
     }
 
     $scope.archiveCards = function(cards){
+        card = cardDateResize(card);
         if(window.confirm('クリアしてよろしいですか？')){
             var promises = cards.map(function(card){
                 return archiveCard(card);

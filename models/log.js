@@ -11,6 +11,8 @@ var LogSchema = new Schema({
     memo: String,
     board: ObjectId,
     icon: String,
+    category: String,
+    deadline: Date,
     action: String
 });
 LogSchema.plugin(timestamps);

@@ -32,12 +32,17 @@ router.get('/', function (req, res) {
     Ticket.find({}, function (err, ticket) {
         if (err) {
             res.send(err);
+            return
         }
         res.json(ticket);
     });
 });
 
 router.post('/', function (req, res) {
+    if(req.body.deadline !== undefined) {
+        var arr_d = req.body.deadline.split('-');
+        var deadline = new Date(arr_d[0], arr_d[1]-1, arr_d[2],9,0,0)
+    }
     var ticket = new Ticket();
     ticket.name = req.body.name;
     ticket.user = req.body.user;
@@ -46,9 +51,12 @@ router.post('/', function (req, res) {
     ticket.sprint = req.body.sprint;
     ticket.board = req.body.board;
     ticket.icon = "slime";
+    ticket.category = req.body.category;
+    ticket.deadline = deadline;
     ticket.save(function (err) {
         if (err) {
             res.send(err);
+            return;
         }
 
         var log = new Log();
@@ -59,9 +67,12 @@ router.post('/', function (req, res) {
         log.memo = ticket.memo;
         log.sprint = ticket.sprint;
         log.icon = ticket.icon;
+        log.category = req.body.category;
+        log.deadline = deadline;
         log.save(function (err) {
             if (err) {
                 res.send(err);
+                return;
             }
         });
 
@@ -69,13 +80,13 @@ router.post('/', function (req, res) {
             message: "Saved."
         });
     });
-
 });
 
 router.get('/:tid', function (req, res) {
     Ticket.findById(req.params.tid, function (err, ticket) {
         if (err) {
             res.send(err);
+            return
         }
         res.json(ticket);
     });
@@ -87,20 +98,24 @@ router.put('/:tid', function (req, res) {
         if (err) {
             res.send(err);
         }
+        if(req.body.deadline !== undefined) {
+            var arr_d = req.body.deadline.split('-');
+            var deadline = new Date(arr_d[0], arr_d[1]-1, arr_d[2],9,0,0)
+        }
+
         ticket.name = req.body.name ? req.body.name : ticket.name;
         ticket.user = req.body.user ? req.body.user : ticket.user;
         ticket.status = req.body.status ? req.body.status : ticket.status;
         ticket.memo = req.body.memo ? req.body.memo : ticket.memo;
         ticket.sprint = req.body.sprint ? req.body.sprint : ticket.sprint;
         ticket.icon = req.body.icon ? req.body.icon : ticket.icon;
+        ticket.category = req.body.category ? req.body.category : ticket.category;
+        ticket.deadline = deadline ? deadline : ticket.deadline;
 
-
-        res.json({
-            message: "Updated."
-        });
-
+        console.log(ticket);
         ticket.save(function (err) {
             if (err) {
+                console.log(err);
                 res.send(err);
             }
             if (process.env.DEVHUB) {
@@ -117,6 +132,8 @@ router.put('/:tid', function (req, res) {
             log.memo = ticket.memo;
             log.sprint = ticket.sprint;
             log.icon = ticket.icon;
+            log.category = req.body.category;
+            log.deadline = deadline;
             log.save(function (err) {
                 if (err) {
                     res.send(err);
@@ -125,6 +142,11 @@ router.put('/:tid', function (req, res) {
 
 
         });
+
+        res.json({
+            message: "Updated."
+        });
+
     });
 });
 
@@ -135,6 +157,7 @@ router.delete('/:tid', function (req, res) {
         function (err) {
             if (err) {
                 res.send(err);
+                return
             }
             res.json({
                 message: "Item deleted."

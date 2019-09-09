@@ -10,7 +10,9 @@ var TicketSchema = new Schema({
     sprint: Number,
     memo: String,
     board: ObjectId,
-    icon: String
+    icon: String,
+    category: String,
+    deadline: Date
 });
 TicketSchema.plugin(timestamps);
 module.exports = mongoose.model('Ticket', TicketSchema);

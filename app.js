@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var dotenv = require('dotenv');
-dotenv.load();
+dotenv.config();
 
 var mongoose = require('mongoose');
 
